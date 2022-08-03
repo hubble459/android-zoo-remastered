@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/bar"
+        android:layout_width="10dp"
+        android:layout_height="411dp"
+        android:background="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fightFragmentContainer"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/bar"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/myAnimalImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opponentImage"
+        app:srcCompat="@mipmap/bunny" />
+
+    <ImageView
+        android:id="@+id/opponentImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image"
+        app:layout_constraintBottom_toTopOf="@+id/myAnimalImage"
+        app:layout_constraintEnd_toStartOf="@+id/bar"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/chicken" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#806200EE"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/myAnimalImage"
+        app:layout_constraintEnd_toStartOf="@+id/bar"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/opponentName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="18sp"
+            tools:text="Chuck [Level 3]" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hp_bar"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+
+        <ProgressBar
+            android:id="@+id/opponentHPBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#806200EE"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bar"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/myAnimalName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark"
+            android:textSize="18sp"
+            tools:text="Bunny [Level 1]" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/hp_bar"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="12sp" />
+
+        <ProgressBar
+            android:id="@+id/hpBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/finishMessage"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#90000000"
+        android:textAlignment="center"
+        android:textColor="@color/colorAccent"
+        android:textSize="50sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="You WIN!" />
+
+    <ImageView
+        android:id="@+id/richard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image"
+        android:scaleX="-1"
+        android:src="@mipmap/richard"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/myAnimalImage"
+        app:layout_constraintEnd_toEndOf="@+id/myAnimalImage"
+        app:layout_constraintStart_toStartOf="@+id/myAnimalImage"
+        app:layout_constraintTop_toTopOf="@+id/myAnimalImage" />
+
+    <ImageView
+        android:id="@+id/richardFoe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:contentDescription="@string/image"
+        android:src="@mipmap/richard"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/myAnimalImage"
+        app:layout_constraintEnd_toEndOf="@+id/opponentImage"
+        app:layout_constraintStart_toStartOf="@+id/opponentImage"
+        app:layout_constraintTop_toTopOf="@+id/opponentImage" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

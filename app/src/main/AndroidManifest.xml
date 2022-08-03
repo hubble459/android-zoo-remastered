@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="nl.saxion.quentin.myzooremastered">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/horse"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/horse"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.map.MapActivity" />
+        <activity
+            android:name=".ui.home.AnimalDetails"
+            android:label="@string/animal" />
+        <activity
+            android:name=".ui.notifications.PopulationGraph"
+            android:label="@string/graph" />
+        <activity
+            android:name=".ui.notifications.SettingsActivity"
+            android:label="@string/settings" />
+        <activity
+            android:name=".ui.home.games.pokemonbattle.AnimalFight"
+            android:label="@string/battle" />
+        <activity
+            android:name=".ui.home.MovesActivity"
+            android:label="@string/moves"
+            android:parentActivityName=".ui.home.AnimalDetails" />
+        <activity
+            android:name=".ui.home.GamesActivity"
+            android:label="@string/play"
+            android:parentActivityName=".ui.home.AnimalDetails" />
+        <activity
+            android:name=".ui.home.games.HigherOrLowerActivity"
+            android:label="@string/higher_or_lower"
+            android:parentActivityName=".ui.home.GamesActivity" />
+        <activity
+            android:name=".ui.home.games.TicTacToeActivity"
+            android:label="@string/tic_tac_toe"
+            android:parentActivityName=".ui.home.GamesActivity" />
+        <activity
+            android:name=".ui.home.games.FourInARowActivity"
+            android:label="@string/four_in_a_row"
+            android:parentActivityName=".ui.home.GamesActivity" />
+        <activity
+            android:name=".ui.home.games.WordSnakeActivity"
+            android:label="@string/word_snake"
+            android:parentActivityName=".ui.home.GamesActivity" />
+        <activity
+            android:name=".ui.home.games.HangmanActivity"
+            android:label="@string/hangman"
+            android:parentActivityName=".ui.home.GamesActivity" />
+    </application>
+
+</manifest>

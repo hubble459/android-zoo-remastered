@@ -1,0 +1,217 @@
+@startuml
+header
+<font color=red size=24>Zoo App</font>
+endheader
+
+skinparam class {
+    BackgroundColor<<Adapter>> Coral
+    BackgroundColor<<Model>> Magenta
+    BackgroundColor<<Utils>> APPLICATION
+    BackgroundColor<<Singleton>> LightPink
+    BackgroundColor<<Fragment>> Cyan
+    BackgroundColor<<Activity>> SpringGreen
+
+    ArrowThickness 3
+}
+
+package nl.saxion.quentin.myzooremastered.ui {
+    class MainActivity<<Activity>> {
+        FragmentContainer
+        BottomNavBar
+    }
+
+    package nl.saxion.quentin.myzooremastered.ui.home {
+        class HomeFragment<<Fragment>> {
+            ArrayList<Animal> allAnimals
+        }
+        AnimalDetails<<Activity>>
+        AnimalDetails -> HomeFragment
+
+        MovesActivity<<Activity>>
+        MovesActivity -> HomeFragment
+
+        GamesActivity<<Activity>>
+        HomeFragment <- GamesActivity
+
+        package nl.saxion.quentin.myzooremastered.ui.home.games {
+            FourInARowActivity<<Activity>>
+            HangmanActivity<<Activity>>
+            HigherOrLowerActivity<<Activity>>
+            TicTacToeActivity<<Activity>>
+            WordSnakeActivity<<Activity>>
+            GamesActivity <-- FourInARowActivity
+            GamesActivity <-- HangmanActivity
+            GamesActivity <-- HigherOrLowerActivity
+            GamesActivity <-- TicTacToeActivity
+            GamesActivity <-- WordSnakeActivity
+            package nl.saxion.quentin.myzooremastered.ui.home.games.pokemonbattle {
+                class AnimalFightActivity {
+                    FragmentContainer
+                }
+                AnimalFightActivity<<Activity>>
+                GamesActivity --> AnimalFightActivity
+                BagFragment<<Fragment>>
+                FightAttackFragment<<Fragment>>
+                FightMessageFragment<<Fragment>>
+                MainFightFragment<<Fragment>>
+                PokeStatFragment<<Fragment>>
+                AnimalFightActivity <-- BagFragment
+                AnimalFightActivity <-- FightAttackFragment
+                AnimalFightActivity <-- FightMessageFragment
+                AnimalFightActivity <-- MainFightFragment
+                AnimalFightActivity <-- PokeStatFragment
+            }
+        }
+    }
+
+    package nl.saxion.quentin.myzooremastered.ui.map {
+        class MapFragment<<Fragment>> {
+            ArrayList<String> regions
+        }
+
+        class MapActivity<<Activity>> {
+            ArrayList<Animal> animalsInRegion
+        }
+
+        MapFragment <- MapActivity
+    }
+
+    package nl.saxion.quentin.myzooremastered.ui.notifications {
+        class NotificationFragment<<Fragment>> {
+            ArrayList<Notification> notifications
+        }
+
+        class PopulationGraph<<Activity>>
+        PopulationGraph -> NotificationFragment
+
+        class SettingsActivity<<Activity>>
+        NotificationFragment <- SettingsActivity
+    }
+
+    package nl.saxion.quentin.myzooremastered.ui.shop {
+        class ShopFragment<<Fragment>> {
+            ArrayList<ShopItem> shopItems
+        }
+    }
+
+    MainActivity --> HomeFragment
+    MapFragment --> MainActivity
+    ShopFragment --> MainActivity
+    NotificationFragment --> MainActivity
+}
+
+package nl.saxion.quentin.myzooremastered.adapters {
+    class ListViewAdapter<<Adapter>> {
+        getView()
+    }
+    class GridViewAdapter<<Adapter>> {
+        getView()
+    }
+    class RegionAdapter<<Adapter>> {
+        getView()
+    }
+    class NotificationListAdapter<<Adapter>> {
+        getView()
+    }
+
+    ListViewAdapter --> HomeFragment
+    GridViewAdapter --> ShopFragment
+    RegionAdapter --> MapFragment
+    NotificationListAdapter --> NotificationFragment
+
+    ListViewAdapter --> MapActivity
+}
+
+package nl.saxion.quentin.myzooremastered.lists {
+    class RegionList <<Singleton>> {
+        {static} - HashMap<String, List<Animal>>
+        {static} + getInstance()
+    }
+
+    class NotificationList<<Singleton>> {
+        {static} - ArrayList<Notification>
+        {static} + getInstance()
+    }
+
+     NotificationList ...> NotificationFragment
+     RegionList ...> MapFragment
+}
+
+package nl.saxion.quentin.myzooremastered.models {
+    class ShopItem<<Model>> {
+        - String itemName
+        - int price
+        - int imageResource
+        - int bgColor
+        - boolean isAnimal
+        getters()
+    }
+
+    class Animal<<Model>> {
+        - Animal Properties
+        getters()
+        setters()
+    }
+
+    class Move<<Model>> {
+        - Move Properties
+        getters()
+        setters()
+    }
+
+    class MoveSet {
+        - ArrayList<Move> allMoves
+        getRandomMove()
+        getFourRandomMoves()
+    }
+
+    Animal -> MoveSet
+
+    class Notification<<Model>> {
+        - String message
+        - int iconResource
+        - String time
+        getters()
+    }
+
+    ShopItem ..* "*" ShopFragment
+    Animal ..* "*" HomeFragment
+    Notification ..* "*" NotificationFragment
+    Move -* "*" Animal
+
+    Animal ..* "*" RegionList : contains
+    Notification ..* "*" NotificationList : contains
+}
+
+package nl.saxion.quentin.myzooremastered.coinsandfood {
+    class CoinsAndFood<<Singleton>> {
+        {static} - HashMap<String, Integer>
+        {static} + getInstance()
+        {static} + getCoins()
+        {static} + setCoins()
+        {static} + getFood()
+        {static} + setFood()
+    }
+
+    CoinsAndFood --> ShopFragment
+}
+
+class ZooUtils<<Utils>> {
+    {static} + saveAll()
+    {static} + saveRegionList()
+    {static} + saveNotifications()
+    {static} + saveCounters()
+    {static} + removeAll()
+}
+
+note left of ZooUtils : Called whenever a change is made
+
+legend top Left
+    Green: Activity
+    Blue: Fragment
+    Purple: Model
+    Pink: Singleton
+    Orange: Adapter
+    Greyish Blue: Application level class
+endlegend
+@enduml
